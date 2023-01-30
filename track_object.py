@@ -15,8 +15,7 @@ class FaceObject:
     """
 
     def __init__(self, face, size=20, pos=[0, 0], velo=[0, 0]):
-        self.face = cv2.imread(face)[190:390,190:390]
         self.size = size
+        self.face = cv2.resize(cv2.imread(face)[190:390,190:390],[size,size])
         self.pos = pos
         self.velo = velo
-
