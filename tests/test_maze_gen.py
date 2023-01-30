@@ -6,9 +6,9 @@ import maze_gen
 from matplotlib import pyplot as plt
 
 # Try some parameters
-height = 120
-width = 180
-num_obstacles = 8
+HEIGHT = 120
+WIDTH = 180
+NUM_OBS = 8
 
-myMap = maze_gen.NewMap(m=height,n=width,n_obstacles=num_obstacles)
-plt.imsave("test_map.jpg",myMap.map,cmap="gray")
+myMap = maze_gen.NewMap(HEIGHT, WIDTH, NUM_OBS)
+plt.imsave("test_map.jpg", myMap.map, cmap="gray")
