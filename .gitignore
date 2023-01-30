@@ -131,3 +131,6 @@ dmypy.json
 # Test images
 test_map.jpg
 test_face.jpg
+
+# Test video
+test_result.avi
