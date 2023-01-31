@@ -1,3 +1,3 @@
 # myObjectTrackingTest
 
-A demonstration of visual object tracking
+Generate a simple video of multiple objects bouncing around a randomly generated maze
