@@ -14,8 +14,11 @@ class NewMap:
     """
 
     def __init__(self, m=240, n=360, n_obstacles=5, t_wall=4):
-        self.map = np.ones([m, n, 3], dtype='uint8')*255  # OpenCV needs 3 channel image
+        self.map = np.zeros([m, n, 3], dtype='uint8')  # OpenCV needs 3 channel image
         self.t_wall = t_wall
+
+        # Pad boundary
+        self.map[t_wall:-t_wall,t_wall:-t_wall,:] = 255
 
         # Insert obstacles
         for obs in self.__obstacle_list(n_obstacles):
