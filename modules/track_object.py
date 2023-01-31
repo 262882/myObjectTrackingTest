@@ -1,6 +1,5 @@
 """Different objects that can be tracked"""
 
-import numpy as np
 import cv2
 
 class NewObject:
@@ -16,6 +15,6 @@ class NewObject:
 
     def __init__(self, img, size=41, pos=[0, 0], velo=[0, 0]):
         self.size = size
-        self.img = cv2.resize(cv2.imread(img),[size,size])
+        self.img = cv2.resize(cv2.imread(img), [size, size])
         self.pos = pos
         self.velo = velo

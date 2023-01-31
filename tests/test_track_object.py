@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+"""Test case for basic function"""
 
 import sys
 sys.path.append('../modules')
-import track_object
 import cv2
+import track_object
 
 # Try some parameters
 SIZE = 31

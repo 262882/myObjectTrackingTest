@@ -18,7 +18,7 @@ class NewMap:
         self.t_wall = t_wall
 
         # Pad boundary
-        self.map[t_wall:-t_wall,t_wall:-t_wall,:] = 255
+        self.map[t_wall:-t_wall, t_wall:-t_wall, :] = 255
 
         # Insert obstacles
         for obs in self.__obstacle_list(n_obstacles):
