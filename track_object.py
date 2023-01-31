@@ -3,19 +3,19 @@
 import numpy as np
 import cv2
 
-class FaceObject:
+class NewObject:
     """
-    A class that represents a face
+    A class that represents a trackable object
 
     Keyword arguments:
-    size -- the width and height of the object (default 20)
+    size -- the width and height of the object (default 41)
     pos -- the position of the center of the object (default [0, 0])
     velo -- the velocity of the object (default [0, 0])
-    face -- the path to the face image
+    img -- the path to the image
     """
 
-    def __init__(self, face, size=41, pos=[0, 0], velo=[0, 0]):
+    def __init__(self, img, size=41, pos=[0, 0], velo=[0, 0]):
         self.size = size
-        self.face = cv2.resize(cv2.imread(face)[190:390,190:390],[size,size])
+        self.img = cv2.resize(cv2.imread(img),[size,size])
         self.pos = pos
         self.velo = velo

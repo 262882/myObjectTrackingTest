@@ -9,7 +9,7 @@ if __name__ == '__main__':
 	print("Welcome to the Object Tracking Test")
 
 	print("Initialising tracking object")
-	myObj = track_object.FaceObject('./lenna.png')
+	myObj = track_object.NewObject('./image/crop_lenna.png')
 	myObj.pos = [myObj.size*2,myObj.size*2]
 	myObj.velo = [2,2]
 	#font = cv2.FONT_HERSHEY_COMPLEX_SMALL
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 		
 		# Update world
 		canvas = np.copy(myMaze.map)  # Fetch blank map
-		canvas[myObj.pos[0]-myObj.size//2-1:myObj.pos[0]+myObj.size//2, myObj.pos[1]-myObj.size//2-1:myObj.pos[1]+myObj.size//2] = myObj.face
+		canvas[myObj.pos[0]-myObj.size//2-1:myObj.pos[0]+myObj.size//2, myObj.pos[1]-myObj.size//2-1:myObj.pos[1]+myObj.size//2] = myObj.img
 		
 		# Add graphics
 		#canvas = cv2.putText(canvas, str(myObj.bounce), (myObj.pos[1],myObj.pos[0]), font, 1, color)

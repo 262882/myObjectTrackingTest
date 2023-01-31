@@ -10,5 +10,5 @@ SIZE = 31
 POS = [1, 1]
 VEL = [2, 2]
 
-newFace = track_object.FaceObject('../lenna.png', SIZE, POS, VEL)
-cv2.imwrite("test_face.jpg", newFace.face)
+newFace = track_object.NewObject('../image/crop_lenna.png', SIZE, POS, VEL)
+cv2.imwrite("test_face.jpg", newFace.img)
