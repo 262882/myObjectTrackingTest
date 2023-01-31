@@ -14,7 +14,7 @@ class FaceObject:
     face -- the path to the face image
     """
 
-    def __init__(self, face, size=40, pos=[0, 0], velo=[0, 0]):
+    def __init__(self, face, size=41, pos=[0, 0], velo=[0, 0]):
         self.size = size
         self.face = cv2.resize(cv2.imread(face)[190:390,190:390],[size,size])
         self.pos = pos

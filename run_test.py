@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
 	print("Initialising tracking object")
 	myObj = track_object.FaceObject('./lenna.png')
-	myObj.pos = [myObj.size,myObj.size]
+	myObj.pos = [myObj.size*2,myObj.size*2]
 	myObj.velo = [2,2]
 	#font = cv2.FONT_HERSHEY_COMPLEX_SMALL
 	#color = (255, 255, 255) 
@@ -20,11 +20,13 @@ if __name__ == '__main__':
 
 	# Generate until valid map (No initial clash)
 	top_left = [myObj.pos[0]-myObj.size//2, myObj.pos[1]-myObj.size//2]
-	initial_occupancy = myMaze.map[top_left[0]:top_left[0]+myObj.size, top_left[1]:top_left[1]+myObj.size]
+	curr_occupancy = myMaze.map[top_left[0]:top_left[0]+myObj.size, top_left[1]:top_left[1]+myObj.size]
 	sum_empty = 3*255*(myObj.size)**2
+	sum_edge = 3*255*(myObj.size)   # Count edge of object, ignore corners
 
-	while np.sum(initial_occupancy) != sum_empty:
+	while np.sum(curr_occupancy) != sum_empty:
 		myMaze = maze_gen.NewMap()
+		curr_occupancy = myMaze.map[top_left[0]:top_left[0]+myObj.size, top_left[1]:top_left[1]+myObj.size]
 
 	print("Start visualisation")
 	FPS = 30
@@ -33,27 +35,34 @@ if __name__ == '__main__':
 
 	# Main loop
 	for frame in range(FPS*duration):
+		print(frame)
 
 		# Update ball position
 		myObj.pos = [myObj.pos[0] + myObj.velo[0],myObj.pos[1] + myObj.velo[1]]
 		
-		# Update ball velocity if touch boundary
-		if (myObj.pos[0] + myObj.size//2) >= myMaze.map.shape[0]:
+		# Update ball velocity if edge touch obstacle
+		# Bottom
+		if np.sum(myMaze.map[myObj.pos[0]+myObj.size//2+myObj.velo[0], myObj.pos[1]-myObj.size//2-1:myObj.pos[1]+myObj.size//2]) < sum_edge:
 			myObj.velo[0] = -myObj.velo[0]
-
-		if (myObj.pos[1] + myObj.size//2) >= myMaze.map.shape[1]:
+		
+		# Right
+		if np.sum(myMaze.map[myObj.pos[0]-myObj.size//2-1:myObj.pos[0]+myObj.size//2, myObj.pos[1]+myObj.size//2+myObj.velo[1]]) < sum_edge:
 			myObj.velo[1] = -myObj.velo[1]
-
-		if (myObj.pos[0] - myObj.size//2) <= 0:
+		
+		# Top
+		if np.sum(myMaze.map[myObj.pos[0]-myObj.size//2-1+myObj.velo[0], myObj.pos[1]-myObj.size//2-1:myObj.pos[1]+myObj.size//2]) < sum_edge:
 			myObj.velo[0] = -myObj.velo[0]
-
-		if (myObj.pos[1] - myObj.size//2) <= 0:
+		
+		# Left
+		if np.sum(myMaze.map[myObj.pos[0]-myObj.size//2-1:myObj.pos[0]+myObj.size//2, myObj.pos[1]-myObj.size//2-1+myObj.velo[1]]) < sum_edge:
 			myObj.velo[1] = -myObj.velo[1]
 		
 		# Update world
-		canvas = np.copy(myMaze.map)
-		canvas[myObj.pos[0]-myObj.size//2:myObj.pos[0]+myObj.size//2, myObj.pos[1]-myObj.size//2:myObj.pos[1]+myObj.size//2] = myObj.face
-	
+		canvas = np.copy(myMaze.map)  # Fetch blank map
+		canvas[myObj.pos[0]-myObj.size//2-1:myObj.pos[0]+myObj.size//2, myObj.pos[1]-myObj.size//2-1:myObj.pos[1]+myObj.size//2] = myObj.face
+		
+		# Add graphics
+		#canvas = cv2.putText(canvas, str(myObj.bounce), (myObj.pos[1],myObj.pos[0]), font, 1, color)
 		video.write(canvas)
 		
 video.release()

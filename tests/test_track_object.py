@@ -6,7 +6,7 @@ import track_object
 import cv2
 
 # Try some parameters
-SIZE = 30
+SIZE = 31
 POS = [1, 1]
 VEL = [2, 2]
 
