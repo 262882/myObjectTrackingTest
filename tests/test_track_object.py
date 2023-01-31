@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-sys.path.append('../')
+sys.path.append('../modules')
 import track_object
 import cv2
 

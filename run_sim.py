@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-import world_model
 import numpy as np
 import cv2
+import sys
+sys.path.append('./modules')
+import world_model
 
 if __name__ == '__main__':
 	print("Welcome to the Object Tracking Test Generator")
@@ -19,7 +21,7 @@ if __name__ == '__main__':
 	print("Start recording")
 	FPS = 30 # Capture rate
 	duration = 10 # seconds
-	video = cv2.VideoWriter('./test_result.avi', cv2.VideoWriter_fourcc(*'MP42'), float(FPS), (test_sim.canvas.shape[1], test_sim.canvas.shape[0]))
+	video = cv2.VideoWriter('./tracking_test.avi', cv2.VideoWriter_fourcc(*'MP42'), float(FPS), (test_sim.canvas.shape[1], test_sim.canvas.shape[0]))
 
 	# Main loop
 	for frame in range(FPS*duration):

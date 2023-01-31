@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-sys.path.append('../')
+sys.path.append('../modules')
 import maze_gen
 from matplotlib import pyplot as plt
 
