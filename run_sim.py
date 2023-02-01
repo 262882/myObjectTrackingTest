@@ -11,12 +11,12 @@ print("Welcome to the Object Tracking Test Generator")
 print("Initialising simulator")
 objects = [
     ['./image/sunflower.tif', [-2, 2]],
-    ['./image/hill.jpg', [2, -2]],
+    ['./image/face.png', [2, -2]],
     ['./image/parrot.jpg', [-2, -2]],
     ['./image/crop_lenna.png', [2, 2]]
     ]
 
-test_sim = world_model.NewWorld(objects, obj_size=81, height=480, width=640)
+test_sim = world_model.NewWorld(objects, obj_size=81, height=480, width=640, background='./image/hill.jpg')
 
 # Set capture parameters
 print("Start recording")

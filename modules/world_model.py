@@ -3,6 +3,7 @@
 import numpy as np
 import maze_gen
 import track_object
+import cv2
 
 class NewWorld:
     """
@@ -18,11 +19,17 @@ class NewWorld:
     """
 
     def __init__(self, def_obj, obj_size=41, height=240, width=360,
-                 num_obstacles=5, thickness_wall=4):
+                 num_obstacles=5, thickness_wall=4, background=None):
 
         # Evaluate checksums
         self.sum_empty = 3*255*(obj_size)**2
         self.sum_edge = 3*255*(obj_size)          # Count edge of object, ignore corners
+
+        # Load background
+        if background==None:
+            self.background = np.ones([height,width,3], dtype='uint8')*255
+        else:
+            self.background = cv2.resize(cv2.imread(background), [width, height])
 
         # Load objects
         self.object_list = []
@@ -73,6 +80,7 @@ class NewWorld:
 
     def __update_world(self):
         self.canvas = np.copy(self.myMaze.map)  # Fetch blank map
+        self.canvas = np.where(self.canvas==0, self.canvas, self.background)
         for obj in self.object_list:
             self.canvas[obj.pos[0]-obj.size//2-1:obj.pos[0]+obj.size//2,
                         obj.pos[1]-obj.size//2-1:obj.pos[1]+obj.size//2] = obj.img
