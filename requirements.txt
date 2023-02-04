@@ -1,2 +1,2 @@
-numpy==1.17.4
+numpy>=1.19.3
 opencv_python==4.7.0.68
